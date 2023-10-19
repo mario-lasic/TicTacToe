@@ -12,12 +12,13 @@ Y88b. 888Y88b.   Y88b. 888  888Y88b.   Y88b. Y88..88PY8b.
 
 grid_string = """
 _____________
-| - | - | - |
+| 1 | 2 | 3 |
 =============
-| - | - | - |
+| 4 | 5 | 6 |
 =============
-| - | - | - |
+| 7 | 8 | 9 |
 =============
 """
 
-print(grid_string.replace("-", "1", 1))
+player1 = input("Enter player 1 name: ")
+player2 = input("Enter player 2 name: ")
