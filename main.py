@@ -1,3 +1,4 @@
+from players import Player
 tictactoe_logo_ascii_art = """
 888   d8b        888                   888                    
 888   Y8P        888                   888                    
@@ -20,5 +21,11 @@ _____________
 =============
 """
 
-player1 = input("Enter player 1 name: ")
-player2 = input("Enter player 2 name: ")
+p_name1 = input("Enter player 1 name: ")
+p_name2 = input("Enter player 2 name: ")
+
+player1 = Player(p_name1)
+player2 = Player(p_name2)
+
+if player1.check_winner():
+    print("We have a winner")
