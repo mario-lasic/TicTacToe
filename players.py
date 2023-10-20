@@ -16,12 +16,16 @@ class Player:
         ("3", "5", "7"),
     ]
 
-    def check_winner(self):
+    def check_winner(self) -> bool:
         for combination in self.possibleCombinations:
-            if all(int(x) in self.board for x in combination):
-                self.winner = True 
-                return self.winner
-            else:
-                print("Some elements of the tuple are not in the list")
+            if all(x in self.board for x in combination):
+                self.winner = True
+                break
         return self.winner
 
+    def get_field(self) -> str:
+        turn = input(f"{self.name} select number from 1-9 to pick field: ")
+        while int(turn) not in range(1, 10):
+            turn = input("Please select number from 1 to 9: ")
+        self.board.append(turn)
+        return turn

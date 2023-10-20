@@ -1,4 +1,5 @@
 from players import Player
+
 tictactoe_logo_ascii_art = """
 888   d8b        888                   888                    
 888   Y8P        888                   888                    
@@ -27,5 +28,25 @@ p_name2 = input("Enter player 2 name: ")
 player1 = Player(p_name1)
 player2 = Player(p_name2)
 
-if player1.check_winner():
-    print("We have a winner")
+player_turn = 1
+used_fields = []
+
+
+def show_board() -> None:
+    print(f"{player1.name} {player1.score} : {player2.score} {player2.name} ")
+    print(grid_string)
+
+
+def game():
+    global player_turn, grid_string
+    if player_turn == 1:
+        grid_string = grid_string.replace(player1.get_field(), "X")
+
+    print(grid_string)
+
+
+game()
+
+
+def replay():
+    pass
