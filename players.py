@@ -16,6 +16,7 @@ class Player:
         ("3", "5", "7"),
     ]
 
+    # Checks if there is a winner
     def check_winner(self) -> bool:
         for combination in self.possibleCombinations:
             if all(x in self.board for x in combination):
@@ -23,10 +24,10 @@ class Player:
                 break
         return self.winner
 
+    # Get user to input number of field and checks if valid
     def get_field(self, fields: list[str]) -> str:
         while True:
             used = fields
-            print(used)
             try:
                 turn = input(f"{self.name} select number from 1-9 to pick field: ")
                 int_number = int(turn)

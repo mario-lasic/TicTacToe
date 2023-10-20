@@ -11,7 +11,7 @@ Y88b. 888Y88b.   Y88b. 888  888Y88b.   Y88b. Y88..88PY8b.
  "Y888888 "Y8888P "Y888"Y888888 "Y8888P "Y888 "Y88P"  "Y8888 
 """
 
-
+# Grid template
 grid_string = """
 _____________
 | 1 | 2 | 3 |
@@ -24,6 +24,9 @@ _____________
 
 grid = grid_string
 
+print(tictactoe_logo_ascii_art)
+print("\nWelcome to the game of Tic Tac Toe\n")
+# Getting players names
 p_name1 = input("Enter player 1 name: ")
 p_name2 = input("Enter player 2 name: ")
 
@@ -34,26 +37,38 @@ player_turn = 1
 used_fields = []
 
 
+# Show initial board and score
 def show_board() -> None:
     print(f"\n \n{player1.name} {player1.score} : {player2.score} {player2.name} ")
     print(grid)
 
 
+# Resets board for new game
+def board_reset():
+    global used_fields, grid, player_turn
+    grid = grid_string
+    player1.board = []
+    player2.board = []
+    used_fields = []
+    player_turn = 2
+
+
+# Checks if user want a new game
 def replay():
-    global used_fields, grid
     repeat = input("Do you want to play another game? y/n: ")
     if repeat.lower() == "y":
-        grid = grid_string
-        player1.board = []
-        player2.board = []
-        used_fields = []
+        board_reset()
         game()
     else:
-        print(f"\nFinal score is {player1.name} {player1.score} : {player2.score} {player2.name}")
+        print(
+            f"\nFinal score is {player1.name} {player1.score} : {player2.score} {player2.name}"
+        )
 
 
+# Game functionality
 def game():
     global player_turn, grid, used_fields
+    # Checks if draw!
     if len(used_fields) >= 9:
         print("It is a draw!")
         replay()
@@ -81,5 +96,6 @@ def game():
         else:
             player_turn = 1
             game()
+
 
 game()
