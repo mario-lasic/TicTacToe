@@ -39,10 +39,27 @@ def show_board() -> None:
 
 def game():
     global player_turn, grid_string
+    if player1.board == [] and player2.board == []:
+        show_board()
     if player_turn == 1:
         grid_string = grid_string.replace(player1.get_field(), "X")
-
-    print(grid_string)
+        print(grid_string)
+        if player1.check_winner():
+            player1.score += 1
+            replay()
+        else:
+            player_turn = 2
+            game()
+    else:
+        grid_string = grid_string.replace(player2.get_field(), "O")
+        print(grid_string)
+        if player2.check_winner():
+            player2.score += 1
+            replay()
+        else:
+            player_turn = 1
+            game()
+        
 
 
 game()
