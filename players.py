@@ -23,16 +23,18 @@ class Player:
                 break
         return self.winner
 
-    def get_field(self) -> str:
+    def get_field(self, fields: list[str]) -> str:
         while True:
+            used = fields
+            print(used)
             try:
                 turn = input(f"{self.name} select number from 1-9 to pick field: ")
                 int_number = int(turn)
-                while int_number not in range(1, 10) and turn in self.board:
+                while turn in used or int_number not in range(1, 10):
                     turn = input("Please select number from 1 to 9: ")
                 break
             except ValueError:
-                print("Please use numbers")
+                print("Please use numbers!")
                 continue
 
         self.board.append(turn)

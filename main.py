@@ -22,6 +22,8 @@ _____________
 =============
 """
 
+grid = grid_string
+
 p_name1 = input("Enter player 1 name: ")
 p_name2 = input("Enter player 2 name: ")
 
@@ -33,17 +35,35 @@ used_fields = []
 
 
 def show_board() -> None:
-    print(f"{player1.name} {player1.score} : {player2.score} {player2.name} ")
-    print(grid_string)
+    print(f"\n \n{player1.name} {player1.score} : {player2.score} {player2.name} ")
+    print(grid)
+
+
+def replay():
+    global used_fields, grid
+    repeat = input("Do you want to play another game? y/n: ")
+    if repeat.lower() == "y":
+        grid = grid_string
+        player1.board = []
+        player2.board = []
+        used_fields = []
+        game()
+    else:
+        print(f"\nFinal score is {player1.name} {player1.score} : {player2.score} {player2.name}")
 
 
 def game():
-    global player_turn, grid_string
+    global player_turn, grid, used_fields
+    if len(used_fields) >= 9:
+        print("It is a draw!")
+        replay()
     if player1.board == [] and player2.board == []:
         show_board()
     if player_turn == 1:
-        grid_string = grid_string.replace(player1.get_field(), "X")
-        print(grid_string)
+        user_input = player1.get_field(fields=used_fields)
+        used_fields.append(user_input)
+        grid = grid.replace(user_input, "X")
+        print(grid)
         if player1.check_winner():
             player1.score += 1
             replay()
@@ -51,19 +71,15 @@ def game():
             player_turn = 2
             game()
     else:
-        grid_string = grid_string.replace(player2.get_field(), "O")
-        print(grid_string)
+        user_input = player2.get_field(fields=used_fields)
+        used_fields.append(user_input)
+        grid = grid.replace(user_input, "O")
+        print(grid)
         if player2.check_winner():
             player2.score += 1
             replay()
         else:
             player_turn = 1
             game()
-        
-
 
 game()
-
-
-def replay():
-    pass
